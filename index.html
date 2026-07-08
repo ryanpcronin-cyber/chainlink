@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChainLink</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <p class="eyebrow">Two-word connection game</p>
+      <h1>ChainLink</h1>
+      <p class="subtitle">Connect the start to the target using two-word names and phrases that share one word.</p>
+      <button id="newPuzzle" class="primary">New Puzzle</button>
+    </header>
+
+    <section class="cards">
+      <div class="card"><span>Start</span><strong id="startName">LeBron James</strong></div>
+      <div class="card"><span>Target</span><strong id="targetName">Nate Bargatze</strong></div>
+      <div class="card"><span>Moves</span><strong id="moveCount">0</strong></div>
+    </section>
+
+    <section class="game">
+      <div class="panel">
+        <h2>Your Chain</h2>
+        <ol id="chain" class="chain"></ol>
+        <div id="winBox" class="win hidden"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Make your next move</h2>
+        <p class="rule">Pick a two-word entry that shares exactly one word with your current entry.</p>
+        <input id="guessInput" type="text" placeholder="Type a famous name or phrase..." autocomplete="off" />
+        <div id="suggestions" class="suggestions"></div>
+        <div class="actions">
+          <button id="hintBtn">Hint</button>
+          <button id="undoBtn">Undo</button>
+          <button id="revealBtn">Reveal Path</button>
+        </div>
+        <p id="message" class="message"></p>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
