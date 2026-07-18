@@ -1,22 +1,14 @@
-# ChainLink
+# ChainLink v0.2
 
-A two-word connection game where players link famous names and popular phrases through shared words.
+This version keeps the existing visual style but replaces the weak gameplay with the real concept.
 
-Example:
+## Features
+- Type complete two-word names and phrases
+- Autocomplete suggestions
+- Legal move validation
+- Build any valid route
+- Hints, undo, reveal, and new puzzles
+- Eight curated starter puzzles
+- Win detection
 
-LeBron James → James Cameron → Cameron Diaz → Nate Diaz → Nate Bargatze
-
-## How to play locally
-
-Open `index.html` in a browser.
-
-## How to put online with GitHub Pages
-
-Upload these files to the root of your GitHub repository:
-
-- `index.html`
-- `style.css`
-- `script.js`
-- `README.md`
-
-Then go to Settings → Pages → Deploy from branch → main → root.
+Upload `index.html`, `style.css`, `script.js`, and `README.md` to the root of the GitHub repository.

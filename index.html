@@ -3,45 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ChainLink — connect famous two-word names and phrases through shared words." />
   <title>ChainLink</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="app">
     <header class="hero">
-      <p class="eyebrow">Two-word connection game</p>
-      <h1>ChainLink</h1>
-      <p class="subtitle">Connect the start to the target using two-word names and phrases that share one word.</p>
-      <button id="newPuzzle" class="primary">New Puzzle</button>
+      <div>
+        <p class="eyebrow">Two-word connection game</p>
+        <h1>ChainLink</h1>
+        <p class="subtitle">Build a chain of famous names and popular phrases. Every neighboring entry must share one word.</p>
+      </div>
+      <button id="howBtn" class="round-button" aria-label="How to play">?</button>
     </header>
 
-    <section class="cards">
-      <div class="card"><span>Start</span><strong id="startName">LeBron James</strong></div>
-      <div class="card"><span>Target</span><strong id="targetName">Nate Bargatze</strong></div>
-      <div class="card"><span>Moves</span><strong id="moveCount">0</strong></div>
+    <section class="toolbar">
+      <div class="stat"><span>Puzzle</span><strong id="puzzleCount">1 / 8</strong></div>
+      <div class="stat"><span>Moves</span><strong id="moveCount">0</strong></div>
+      <div class="stat"><span>Best path</span><strong id="bestCount">4</strong></div>
     </section>
 
-    <section class="game">
-      <div class="panel">
-        <h2>Your Chain</h2>
-        <ol id="chain" class="chain"></ol>
-        <div id="winBox" class="win hidden"></div>
+    <section class="game-card">
+      <div class="target-grid">
+        <div class="target-card"><span>Start</span><strong id="startName">LeBron James</strong></div>
+        <div class="target-arrow">→</div>
+        <div class="target-card"><span>Target</span><strong id="targetName">Nate Bargatze</strong></div>
       </div>
 
-      <div class="panel">
-        <h2>Make your next move</h2>
-        <p class="rule">Pick a two-word entry that shares exactly one word with your current entry.</p>
-        <input id="guessInput" type="text" placeholder="Type a famous name or phrase..." autocomplete="off" />
-        <div id="suggestions" class="suggestions"></div>
-        <div class="actions">
-          <button id="hintBtn">Hint</button>
-          <button id="undoBtn">Undo</button>
-          <button id="revealBtn">Reveal Path</button>
+      <div class="chain-header">
+        <div>
+          <p class="section-label">Your chain</p>
+          <p id="instruction">Enter a two-word name or phrase connected to the current entry.</p>
         </div>
-        <p id="message" class="message"></p>
+        <button id="undoBtn" class="text-button" disabled>Undo</button>
       </div>
+
+      <ol id="chainList" class="chain-list"></ol>
+
+      <div class="entry-panel">
+        <label for="guessInput">Next link</label>
+        <div class="input-row">
+          <input id="guessInput" type="text" autocomplete="off" placeholder="Start typing a famous name or phrase..." aria-describedby="message" />
+          <button id="addBtn" class="primary-button">Add</button>
+        </div>
+        <div id="suggestions" class="suggestions hidden"></div>
+        <p id="message" class="message" aria-live="polite"></p>
+      </div>
+
+      <div class="actions">
+        <button id="hintBtn" class="secondary-button">Hint</button>
+        <button id="revealBtn" class="secondary-button">Reveal a path</button>
+        <button id="newBtn" class="secondary-button">New puzzle</button>
+      </div>
+    </section>
+
+    <section class="rules-card">
+      <h2>What counts?</h2>
+      <p>Every entry must be exactly two words and must be a recognizable proper name or popular phrase.</p>
+      <p class="example">LeBron <b>James</b> → <b>James</b> Cameron → Cameron <b>Diaz</b> → Nate <b>Diaz</b> → Nate Bargatze</p>
     </section>
   </main>
+
+  <dialog id="howDialog">
+    <div class="dialog-card">
+      <button id="closeHowBtn" class="close-button" aria-label="Close">×</button>
+      <h2>How to play</h2>
+      <p>Connect the start to the target using recognized two-word names or phrases.</p>
+      <p>Each new entry must share exactly one word with the previous entry. The matching word may be in either position.</p>
+      <p>You can take any valid route—the listed “best path” is only the shortest route in this starter database.</p>
+      <button id="closeHowMainBtn" class="primary-button">Got it</button>
+    </div>
+  </dialog>
+
+  <dialog id="winDialog">
+    <div class="dialog-card win-card">
+      <div class="trophy">🏆</div>
+      <h2>Chain complete!</h2>
+      <p id="winSummary"></p>
+      <button id="nextPuzzleBtn" class="primary-button">Next puzzle</button>
+    </div>
+  </dialog>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,109 +1,30 @@
-const ENTRIES = [
-  'LeBron James','James Cameron','Cameron Diaz','Nate Diaz','Nate Bargatze',
-  'Taylor Swift','Swift Current','Current Events','Event Horizon','Horizon Zero','Zero Dark','Dark Knight','Knight Rider',
-  'Burger King','King James','James Harden','Harden Volumes','Jordan Peele','Michael Jordan','Jordan Peterson','Peterson Academy',
-  'Tom Brady','Brady Bunch','Bunch Johnson','Johnson Controls','Dwayne Johnson','Magic Johnson','Johnson City',
-  'New York','York College','Boston College','Boston Celtics','Celtics Pride','Pride Rock','Rock Hudson','Hudson River',
-  'Jurassic Park','Park Avenue','Avenue Q','Q Tip','Tip ONeill','Shaquille ONeal','Neal Brennan','Brennan Lee',
-  'Harry Potter','Potter Stewart','Stewart Little','Little Mermaid','Mermaid Man','Spider Man','Man United','United States',
-  'Star Wars','Wars End','End Game','Game Theory','Theory Eleven','Eleven Madison','Madison Square','Square Enix',
-  'Bill Gates','Gates Foundation','Foundation Series','Series Finale','Final Fantasy','Fantasy Island','Island Records',
-  'Apple Music','Music Man','Man City','City Lights','Northern Lights','Lights Out','Out Kast','Kast Kings',
-  'Elon Musk','Musk Ox','Ox Baker','Baker Mayfield','Mayfield Kentucky','Kentucky Derby','Derby County',
-  'Tiger Woods','Woods Hole','Hole Foods','Whole Foods','Foods Market','Market Street','Street Fighter',
-  'Oprah Winfrey','Winfrey Show','Show Time','Time Magazine','Magazine Dreams','Dreams Come','Come Away',
-  'Will Smith','Smith College','College Football','Football Manager','Manager Mode','Mode Seven','Seven Samurai',
-  'Morgan Freeman','Freeman Dyson','Dyson Sphere','Sphere Las Vegas','Vegas Golden','Golden State','State Farm',
-  'Kobe Bryant','Bryant Park','Park Place','Place Vendome','Vendome Column','Column Five',
-  'Stephen King','King Kong','Kong Skull','Skull Island','Island Boys','Boys Town',
-  'Ryan Reynolds','Reynolds Wrap','Wrap Battle','Battle Bots','Botswana Flag','Flag Day',
-  'Chris Rock','Rock Star','Star Trek','Trek Bikes','Bikes Direct',
-  'Blue Bloods','Blood Diamond','Diamond Dallas','Dallas Cowboys','Cowboys Stadium',
-  'Family Guy','Guy Fieri','Fieri Foods','Food Network','Network Solutions',
-  'Breaking Bad','Bad Bunny','Bunny Hop','Hop Scotch','Scotch Tape',
-  'South Park','Park Bench','Bench Press','Press Box','Box Office',
-  'Times Square','Square One','One Direction','Direction Home','Home Depot',
-  'Grand Canyon','Canyon Ranch','Ranch Dressing','Dressing Room','Room Service',
-  'Mount Everest','Everest College','College Board','Board Walk','Walk Hard',
-  'Serena Williams','Williams Sonoma','Sonoma County','County Fair','Fair Play',
-  'Lion King','King Arthur','Arthur Ashe','Ashe Stadium','Stadium Goods',
-  'Ninja Turtles','Turtles All','All Star','Star Bucks','Starbucks Reserve',
-  'Minecraft Movie','Movie Star','Star Lord','Lord Byron','Byron Bay'
+const entries=["LeBron James","James Cameron","Cameron Diaz","Nate Diaz","Nate Bargatze","James Harden","James Madison","James Taylor","Taylor Swift","Taylor Lautner","Taylor Hawkins","Sally Hawkins","Sally Field","Wrigley Field","Tom Brady","Brady Quinn","Harley Quinn","Harley Davidson","Pete Davidson","Pete Rose","Axl Rose","Will Smith","Kevin Smith","Smith College","Boston College","Boston Celtics","Serena Williams","Williams College","Emma Stone","Sharon Stone","Sharon Osbourne","Ozzy Osbourne","George Clooney","George Lucas","Lucas Black","Jack Black","Jack White","White House","House Party","Party City","Plant City","Robert Plant","Robert Pattinson","Denzel Washington","Washington Post","Post Malone","Karl Malone","Karl Urban","Urban Meyer","Bill Murray","Murray State","Golden State","Golden Globe","Larry Bird","Bird Box","Box Office","Office Space","Space Jam","Pearl Jam","Pearl Harbor","Harbor Freight","Tom Cruise","Cruise Control","Control Freak","Freak Show","Tonight Show","Lopez Tonight","Jennifer Lopez","Jennifer Lawrence","Tiger Woods","James Woods","Michael Jordan","Michael Jackson","Jackson Browne","Chris Evans","Faith Evans","Faith Hill","Jonah Hill","Jonah Hex","Brad Pitt","Brad Paisley","Johnny Depp","Johnny Cash","Cash App","App Store","Apple Store","Apple Music","Kevin Bacon","Kevin Hart","Bret Hart","Morgan Freeman","Morgan Wallen","Joe Biden","Joe Rogan","Joe Montana","Montana State","State Farm","Mark Cuban","Cuban Missile","Missile Command","Burger King","King Kong","Kong Skull","Jurassic Park","Park Avenue","Madison Avenue","South Park","South Dakota","Dakota Johnson","Magic Johnson","Magic Mike","Mike Tyson","Tyson Fury","Fury Road","Abbey Road","Road House","Full House","Full Metal","Metal Gear","Gear Shift","Night Shift","Night Court","Court TV","Family Guy","Guy Fieri","Breaking Bad","Bad Bunny","Bunny Ranch","Neverland Ranch","Neverland Park"];
+const puzzles=[
+{start:"LeBron James",target:"Nate Bargatze",path:["LeBron James","James Cameron","Cameron Diaz","Nate Diaz","Nate Bargatze"]},
+{start:"Taylor Swift",target:"Nate Bargatze",path:["Taylor Swift","James Taylor","James Cameron","Cameron Diaz","Nate Diaz","Nate Bargatze"]},
+{start:"Tom Brady",target:"Axl Rose",path:["Tom Brady","Brady Quinn","Harley Quinn","Harley Davidson","Pete Davidson","Pete Rose","Axl Rose"]},
+{start:"Will Smith",target:"Boston Celtics",path:["Will Smith","Smith College","Boston College","Boston Celtics"]},
+{start:"Emma Stone",target:"Ozzy Osbourne",path:["Emma Stone","Sharon Stone","Sharon Osbourne","Ozzy Osbourne"]},
+{start:"George Clooney",target:"Party City",path:["George Clooney","George Lucas","Lucas Black","Jack Black","Jack White","White House","House Party","Party City"]},
+{start:"Denzel Washington",target:"Urban Meyer",path:["Denzel Washington","Washington Post","Post Malone","Karl Malone","Karl Urban","Urban Meyer"]},
+{start:"Larry Bird",target:"Harbor Freight",path:["Larry Bird","Bird Box","Box Office","Office Space","Space Jam","Pearl Jam","Pearl Harbor","Harbor Freight"]}
 ];
-
-const PUZZLES = [
-  { start: 'LeBron James', target: 'Nate Bargatze', path: ['LeBron James','James Cameron','Cameron Diaz','Nate Diaz','Nate Bargatze'] },
-  { start: 'Taylor Swift', target: 'Burger King', path: ['Taylor Swift','Swift Current','Current Events','Event Horizon','Horizon Zero','Zero Dark','Dark Knight','Knight Rider','Burger King'] },
-  { start: 'Jurassic Park', target: 'Home Depot', path: ['Jurassic Park','Park Place','Place Vendome','Vendome Column','Column Five','Five Guys','Guy Fieri','Food Network','Network Solutions','Home Depot'] },
-  { start: 'Michael Jordan', target: 'Nate Bargatze', path: ['Michael Jordan','Jordan Peele','LeBron James','James Cameron','Cameron Diaz','Nate Diaz','Nate Bargatze'] },
-  { start: 'Star Wars', target: 'Square Enix', path: ['Star Wars','Wars End','End Game','Game Theory','Theory Eleven','Eleven Madison','Madison Square','Square Enix'] }
-];
-
-// Add entries that are used in paths but not in the main list yet.
-for (const p of PUZZLES) for (const e of p.path) if (!ENTRIES.includes(e)) ENTRIES.push(e);
-
-let currentPuzzle = PUZZLES[0];
-let chain = [currentPuzzle.start];
-
-const $ = (id) => document.getElementById(id);
-const words = (entry) => entry.toLowerCase().split(/\s+/);
-function sharedWords(a, b) {
-  const aw = words(a), bw = words(b);
-  return aw.filter(w => bw.includes(w));
-}
-function isLegalMove(from, to) {
-  return from !== to && sharedWords(from, to).length === 1;
-}
-function render() {
-  $('startName').textContent = currentPuzzle.start;
-  $('targetName').textContent = currentPuzzle.target;
-  $('moveCount').textContent = Math.max(0, chain.length - 1);
-  $('chain').innerHTML = chain.map(x => `<li>${x}</li>`).join('');
-  $('guessInput').value = '';
-  $('suggestions').innerHTML = '';
-  $('message').textContent = '';
-  const won = chain[chain.length - 1] === currentPuzzle.target;
-  $('winBox').classList.toggle('hidden', !won);
-  if (won) $('winBox').textContent = `You solved it in ${chain.length - 1} moves!`;
-}
-function newPuzzle() {
-  currentPuzzle = PUZZLES[Math.floor(Math.random() * PUZZLES.length)];
-  chain = [currentPuzzle.start];
-  render();
-}
-function addMove(entry) {
-  const current = chain[chain.length - 1];
-  if (!isLegalMove(current, entry)) {
-    $('message').textContent = `${entry} does not share exactly one word with ${current}.`;
-    return;
-  }
-  chain.push(entry);
-  render();
-}
-function showSuggestions() {
-  const q = $('guessInput').value.trim().toLowerCase();
-  const current = chain[chain.length - 1];
-  const matches = ENTRIES
-    .filter(e => e.toLowerCase().includes(q))
-    .filter(e => isLegalMove(current, e))
-    .slice(0, 8);
-  $('suggestions').innerHTML = matches.map(e => `<button class="suggestion" data-entry="${e}">${e}</button>`).join('');
-}
-$('newPuzzle').addEventListener('click', newPuzzle);
-$('guessInput').addEventListener('input', showSuggestions);
-$('suggestions').addEventListener('click', (e) => {
-  if (e.target.dataset.entry) addMove(e.target.dataset.entry);
-});
-$('hintBtn').addEventListener('click', () => {
-  const next = currentPuzzle.path[chain.length];
-  $('message').textContent = next ? `Try: ${next}` : 'No hint available.';
-});
-$('undoBtn').addEventListener('click', () => {
-  if (chain.length > 1) chain.pop();
-  render();
-});
-$('revealBtn').addEventListener('click', () => {
-  chain = [...currentPuzzle.path];
-  render();
-});
-render();
+const state={puzzleIndex:0,chain:[]};
+const $=s=>document.querySelector(s);
+const els={startName:$("#startName"),targetName:$("#targetName"),puzzleCount:$("#puzzleCount"),moveCount:$("#moveCount"),bestCount:$("#bestCount"),chainList:$("#chainList"),guessInput:$("#guessInput"),addBtn:$("#addBtn"),suggestions:$("#suggestions"),message:$("#message"),undoBtn:$("#undoBtn"),hintBtn:$("#hintBtn"),revealBtn:$("#revealBtn"),newBtn:$("#newBtn"),howBtn:$("#howBtn"),howDialog:$("#howDialog"),closeHowBtn:$("#closeHowBtn"),closeHowMainBtn:$("#closeHowMainBtn"),winDialog:$("#winDialog"),winSummary:$("#winSummary"),nextPuzzleBtn:$("#nextPuzzleBtn")};
+const normalize=t=>t.trim().toLowerCase().replace(/\s+/g," ");
+const words=e=>e.toLowerCase().split(/\s+/);
+const sharedWords=(a,b)=>[...new Set(words(a).filter(w=>words(b).includes(w)))];
+const isLegalMove=(a,b)=>a!==b&&sharedWords(a,b).length===1;
+const currentPuzzle=()=>puzzles[state.puzzleIndex];
+function startPuzzle(index=state.puzzleIndex){state.puzzleIndex=(index+puzzles.length)%puzzles.length;const p=currentPuzzle();state.chain=[p.start];els.startName.textContent=p.start;els.targetName.textContent=p.target;els.puzzleCount.textContent=`${state.puzzleIndex+1} / ${puzzles.length}`;els.bestCount.textContent=p.path.length-1;els.guessInput.value="";hideSuggestions();setMessage("");renderChain();els.guessInput.focus()}
+function renderChain(){els.chainList.innerHTML="";state.chain.forEach((entry,index)=>{const li=document.createElement("li");li.className="chain-item";const n=document.createElement("span");n.className="chain-number";n.textContent=index+1;const text=document.createElement("span");if(index>0){const shared=sharedWords(state.chain[index-1],entry)[0];text.innerHTML=entry.split(" ").map(part=>normalize(part)===normalize(shared)?`<span class="shared-word">${part}</span>`:part).join(" ")}else{text.textContent=entry}li.append(n,text);els.chainList.appendChild(li)});els.moveCount.textContent=Math.max(0,state.chain.length-1);els.undoBtn.disabled=state.chain.length<=1}
+function setMessage(text,type=""){els.message.textContent=text;els.message.className=`message ${type}`.trim()}
+function exactEntry(v){const n=normalize(v);return entries.find(e=>normalize(e)===n)}
+function submitGuess(value=els.guessInput.value){const guess=exactEntry(value),previous=state.chain[state.chain.length-1],p=currentPuzzle();if(!guess){setMessage("That entry is not in the starter database yet.","error");return}if(state.chain.includes(guess)){setMessage("You already used that entry.","error");return}if(!isLegalMove(previous,guess)){setMessage(`“${guess}” does not share exactly one word with “${previous}.”`,"error");return}state.chain.push(guess);els.guessInput.value="";hideSuggestions();renderChain();setMessage(`Connected through “${sharedWords(previous,guess)[0]}.”`,"correct");if(guess===p.target){setTimeout(showWin,250)}else els.guessInput.focus()}
+function showWin(){const moves=state.chain.length-1,best=currentPuzzle().path.length-1;els.winSummary.textContent=`You solved it in ${moves} moves. ${moves===best?"You found a shortest path.":`The shortest path in this starter database is ${best} moves.`}`;els.winDialog.showModal()}
+function getSuggestions(q){q=normalize(q);if(!q)return[];const current=state.chain[state.chain.length-1];return entries.filter(e=>!state.chain.includes(e)&&normalize(e).includes(q)).sort((a,b)=>{const al=isLegalMove(current,a)?0:1,bl=isLegalMove(current,b)?0:1;return al-bl||a.localeCompare(b)}).slice(0,8)}
+function renderSuggestions(){const matches=getSuggestions(els.guessInput.value);els.suggestions.innerHTML="";if(!matches.length){hideSuggestions();return}const current=state.chain[state.chain.length-1];matches.forEach(entry=>{const b=document.createElement("button");b.type="button";b.className="suggestion";b.innerHTML=`${entry}${isLegalMove(current,entry)?' <span style="color:#42d392">✓ legal</span>':""}`;b.onclick=()=>{els.guessInput.value=entry;hideSuggestions();submitGuess(entry)};els.suggestions.appendChild(b)});els.suggestions.classList.remove("hidden")}
+function hideSuggestions(){els.suggestions.classList.add("hidden");els.suggestions.innerHTML=""}
+function giveHint(){const path=currentPuzzle().path,current=state.chain[state.chain.length-1],i=path.indexOf(current);if(i>=0&&i<path.length-1){const next=path[i+1];setMessage(`Try an entry containing “${sharedWords(current,next)[0]}.”`);return}const legal=entries.find(e=>!state.chain.includes(e)&&isLegalMove(current,e));setMessage(legal?`One legal move is “${legal}.”`:"No legal move found. Undo and try another route.",legal?"":"error")}
+els.guessInput.addEventListener("input",renderSuggestions);els.guessInput.addEventListener("keydown",e=>{if(e.key==="Enter")submitGuess();if(e.key==="Escape")hideSuggestions()});els.addBtn.onclick=()=>submitGuess();els.undoBtn.onclick=()=>{if(state.chain.length>1){state.chain.pop();renderChain();setMessage("Last move removed.");els.guessInput.focus()}};els.hintBtn.onclick=giveHint;els.revealBtn.onclick=()=>setMessage(`One path: ${currentPuzzle().path.join(" → ")}`);els.newBtn.onclick=()=>startPuzzle(state.puzzleIndex+1);els.howBtn.onclick=()=>els.howDialog.showModal();els.closeHowBtn.onclick=()=>els.howDialog.close();els.closeHowMainBtn.onclick=()=>els.howDialog.close();els.nextPuzzleBtn.onclick=()=>{els.winDialog.close();startPuzzle(state.puzzleIndex+1)};startPuzzle(0);
